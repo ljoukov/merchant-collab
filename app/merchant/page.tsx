@@ -4,6 +4,7 @@ import { useUser } from "@auth0/nextjs-auth0";
 import { useEffect, useState } from "react";
 import { listProducts } from "../actions";
 import Stripe from "stripe";
+import ImportButton from "./import-button";
 
 function ProductList() {
   const [products, setProducts] = useState<Stripe.Product[]>([]);
@@ -92,12 +93,15 @@ export default function MerchantLogin() {
         {user ? (
           <div>
             <p className="mb-4 text-center">Welcome, {user.email}</p>
+            <div className="mb-4 text-center">
+              <ImportButton />
+            </div>
             <ProductList />
           </div>
         ) : (
           <div className="text-center">
             <a
-              href="/api/auth/login"
+              href="/auth/login"
               className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 inline-block"
             >
               Login with Auth0
