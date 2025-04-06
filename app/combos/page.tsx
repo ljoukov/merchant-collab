@@ -1,6 +1,19 @@
 import { Product } from '../../types';
+import { GoogleGenAI } from "@google/genai";
 
 async function getCollabAds() {
+  const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_AI_API_KEY || '' });
+
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: "hi",
+    });
+    
+    console.log('Gemini says:', response.text);
+  } catch (error) {
+    console.error('Error calling Gemini API:', error);
+  }
   // Sample product combinations
   const combos: { name: string, products: [Product, Product] }[] = [
     {
