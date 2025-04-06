@@ -1,6 +1,7 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0";
+import { handleSubmit } from './actions';
 
 export default function Home() {
   const { user, isLoading } = useUser();
@@ -11,6 +12,20 @@ export default function Home() {
       {user ? (
         <>
           <pre>{JSON.stringify(user, null, 2)}</pre>
+          <form action={handleSubmit}>
+            <input 
+              type="text" 
+              name="name" 
+              className="border border-gray-300 rounded px-2 py-1 mr-2"
+              placeholder="Enter your name"
+            />
+            <button 
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Submit
+            </button>
+          </form>
         </>
       ) : (
         <h2 className="text-2xl font-bold">
@@ -18,6 +33,5 @@ export default function Home() {
         </h2>
       )}
     </main>
-
   );
 }
